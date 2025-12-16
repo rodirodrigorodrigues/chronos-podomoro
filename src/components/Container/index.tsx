@@ -1,4 +1,4 @@
-import styles from './Container.module.css'
+import styles from './styles.module.css'
 
 // Type semelhante ao HeadingProps,contudo não devemos uni-los 
 // para não aumentar o acoplamento e evitar problemas futuros ao adicionar novas props
