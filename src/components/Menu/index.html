@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exemplo: flex vs inline-flex</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-top: 40px;
+    }
+
+    .wrapper {
+      border: 2px dashed #999;
+      padding: 15px;
+      width: 600px;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .box {
+      border: 2px solid #333;
+      padding: 10px;
+      margin-bottom: 20px;
+      gap: 10px;
+      background: #f9f9f9;
+    }
+
+    .box span {
+      background: #ddd;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    /* DIFERENÇA PRINCIPAL */
+    .flex {
+      display: flex;
+    }
+
+    .inline-flex {
+      display: inline-flex;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Diferença entre display: flex e display: inline-flex</h1>
+
+  <div class="wrapper">
+    <div class="label">display: flex (ocupa toda a largura)</div>
+    <div class="box flex">
+      <span>Item 1</span>
+      <span>Item 2</span>
+      <span>Item 3</span>
+    </div>
+    <span>Não fica ao lado</span>
+
+    <div class="label">display: inline-flex (ajusta ao conteúdo)</div>
+    <div class="box inline-flex">
+      <span>Item 1</span>
+      <span>Item 2</span>
+      <span>Item 3</span>
+    </div>
+    <span>Fica ao lado</span>
+  </div>
+</body>
+</html>
