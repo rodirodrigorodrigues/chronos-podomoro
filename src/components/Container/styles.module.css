@@ -1,10 +1,8 @@
 .container {
     max-width: 96rem;
-    background-color: brown;
     margin: 0 auto;
 }
 
 .content {
-    background-color: blue;
     margin: 3.2rem;
 }
