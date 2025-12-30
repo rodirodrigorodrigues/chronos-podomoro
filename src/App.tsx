@@ -7,6 +7,7 @@ import { Cycles } from "./components/Cycles";
 
 import "./styles/theme.css";
 import "./styles/global.css";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           </div>
         </form>
       </Container>
+      <Container><Footer /></Container>
     </>
   );
 }
