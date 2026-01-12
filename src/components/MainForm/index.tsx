@@ -3,17 +3,52 @@ import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
 import { useRef, useState } from "react";
+import type { TaskModel } from "../../models/TaskModel";
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 
 export function MainForm() {
   // const [taskName, setTaskName] = useState("");
+  const { setState } = useTaskContext();
+
   const taskNameInput = useRef<HTMLInputElement>(null);
 
   function handleCreateNewTask(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Form submitted");
     // console.log(taskName);
-    console.log(taskNameInput.current?.value);
+    // Input is invalid
+    if (taskNameInput.current === null) return;
+
+    const taskName = taskNameInput.current.value.trim();
+
+    if (!taskName) {
+      alert("Please enter a valid task name.");
+      return;
+    }
+
+    const newTask: TaskModel = {
+      id: Date.now().toString(),
+      name: taskName,
+      startDate: Date.now(),
+      completeDate: null,
+      interruptDate: null,
+      duration: 1,
+      type: "workTime",
+    };
+
+    const secondsRemaining = newTask.duration * 60;
+
+    setState((prevState) => {
+      return {
+        ...prevState,
+        activeTask: newTask,
+        currentCycle: 1,
+        secondsRemaining,
+        formattedSecondsRemaining: "00:00",
+        tasks: [...prevState.tasks, newTask],
+      };
+    });
   }
+
   return (
     <form className="form" onSubmit={handleCreateNewTask}>
       <div className="formRow">
