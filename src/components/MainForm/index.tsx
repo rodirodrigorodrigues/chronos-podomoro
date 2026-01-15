@@ -54,6 +54,17 @@ export function MainForm() {
     });
   }
 
+  function handleInterruptTask() {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: "00:00",
+      };
+    });
+  }
+
   return (
     <form className="form" onSubmit={handleCreateNewTask}>
       <div className="formRow">
@@ -83,6 +94,9 @@ export function MainForm() {
             title="Iniciar nova tarefa"
             icon={<PlayCircleIcon />}
             color="green"
+            type="submit"
+            // Evitar que o React reutilize o mesmo botão para as duas ações
+            key="submit-button"
           />
         ) : (
           <DefaultButton
@@ -90,6 +104,10 @@ export function MainForm() {
             title="Interromper tarefa"
             icon={<StopCircleIcon />}
             color="red"
+            onClick={handleInterruptTask}
+            type="button"
+            // Evitar que o React reutilize o mesmo botão para as duas ações
+            key="stop-button"
           />
         )}
       </div>
