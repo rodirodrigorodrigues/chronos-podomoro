@@ -1,16 +1,17 @@
 import { createContext } from "react";
 import type { TaskStateModel } from "../../models/TaskStateModel";
 import { initialTaskState } from "./initialTaskState";
+import type { TaskActionModel } from "./taskAction";
 
 const initialTextContextValue = {
   state: initialTaskState,
-  setState: () => {},
+  dispatch: () => {},
 };
 
 type TaskContextProps = {
   // Os tipos vêm do useState em App.tsx
   state: TaskStateModel;
-  setState: React.Dispatch<React.SetStateAction<TaskStateModel>>;
+  dispatch: React.Dispatch<TaskActionModel>;
 };
 
 export const TaskContext = createContext<TaskContextProps>(
