@@ -33,6 +33,7 @@ export function TextContextProvider({ children }: TextContextProviderProps) {
     if (!state.activeTask) {
       worker.terminate();
     }
+    document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
     worker.postMessage(state);
     // Precisamos vigiar as variáveis dentro do useEffect mesmo que não mudem
   }, [worker, state]);
