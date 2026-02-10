@@ -12,6 +12,7 @@ import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
 import type { TaskModel } from "../../models/TaskModel";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskAction";
+import { toast } from "react-toastify";
 
 type OrderDirection = "asc" | "desc";
 
@@ -65,9 +66,48 @@ export function History() {
   }, [state.tasks, orderBy, orderDirection]);
 
   function handleReset() {
-    if (!confirm("Tem certeza que deseja apagar todo o histórico?")) return;
-    dispatch({ type: TaskActionTypes.RESET_TASK });
+    toast.info(
+      <div>
+        <p>Tem certeza que deseja apagar todo o histórico?</p>
+        <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+          <button
+            onClick={() => {
+              dispatch({ type: TaskActionTypes.RESET_TASK });
+              toast.dismiss();
+              toast.success("Histórico apagado com sucesso");
+            }}
+            style={{
+              background: "#e63946",
+              color: "#fff",
+              border: "none",
+              padding: "6px 10px",
+              cursor: "pointer",
+            }}
+          >
+            Confirmar
+          </button>
+
+          <button
+            onClick={() => toast.dismiss()}
+            style={{
+              background: "#ccc",
+              border: "none",
+              padding: "6px 10px",
+              cursor: "pointer",
+            }}
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>,
+      {
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: false,
+      }
+    );
   }
+
 
   return (
     <MainTemplate>
