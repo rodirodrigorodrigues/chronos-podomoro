@@ -34,8 +34,8 @@
 // }
 
 
-import { useEffect, useReducer, useState } from "react";
-import { TaskContext } from "./taskContext";
+import { useReducer, useState } from "react";
+import { TaskContext } from "./TaskContext";
 import { initialTaskState } from "./initialTaskState";
 
 type TextContextProviderProps = {
@@ -48,7 +48,7 @@ type ActionType = {
 }
 
 export function TextContextProvider({ children }: TextContextProviderProps) {
-  const [state, setState] = useState(initialTaskState);
+  const [state] = useState(initialTaskState);
   const [number, dispatch] = useReducer((state, action: ActionType) => {
     switch (action.type) {
       case 'increment': {
@@ -65,8 +65,8 @@ export function TextContextProvider({ children }: TextContextProviderProps) {
   // }, [state]);
 
   return (
-    <TaskContext.Provider value={{ state, setState }}>
-      {/* {children} */}
+    <TaskContext.Provider value={{ state, dispatch: () => {} }}>
+      {children}
       <h1>Testando: {number}</h1>
       <button onClick={() => dispatch({ type: 'increment', payload: 10 })}>INCREMENT +10</button>
       <button onClick={() => dispatch({ type: 'increment', payload: 20 })}>DECREMENT +20</button>

@@ -28,7 +28,7 @@ export function History() {
     const taskTypeDict: Record<TaskModel["type"], string> = {
       workTime: "Foco",
       shortBreakTime: "Descanso curto",
-      longFormattersBreakTime: "Descanso longo",
+      longBreakTime: "Descanso longo",
     };
 
     return taskTypeDict[taskType] ?? "Desconhecido";
@@ -51,13 +51,18 @@ export function History() {
 
   const sortedTasks = useMemo(() => {
     return [...state.tasks].sort((a: TaskModel, b: TaskModel) => {
-      let valueA = a[orderBy];
-      let valueB = b[orderBy];
+      let valueA: any = a[orderBy];
+      let valueB: any = b[orderBy];
 
-      if (valueA instanceof Date || valueB instanceof Date) {
-        valueA = new Date(valueA).getTime();
-        valueB = new Date(valueB).getTime();
-      }
+      const normalize = (v: any) => {
+        if (v === null || v === undefined) return Number.NEGATIVE_INFINITY;
+        if (typeof v === "number") return v;
+        const d = new Date(v as any);
+        return Number.isNaN(d.getTime()) ? String(v).toLowerCase() : d.getTime();
+      };
+
+      valueA = normalize(valueA);
+      valueB = normalize(valueB);
 
       if (valueA < valueB) return orderDirection === "asc" ? -1 : 1;
       if (valueA > valueB) return orderDirection === "asc" ? 1 : -1;

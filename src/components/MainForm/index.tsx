@@ -66,7 +66,7 @@ export function MainForm() {
           // onChange={(e) => setTaskName(e.target.value)}
           ref={taskNameInput}
           disabled={!!state.activeTask}
-          defaultValue={lastTask}
+          defaultValue={lastTask ?? undefined}
         />
       </div>
       <div className="formRow">

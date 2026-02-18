@@ -1,5 +1,5 @@
-import { useEffect, useReducer, useRef, useState } from "react";
-import { TaskContext } from "./taskContext";
+import { useEffect, useReducer, useRef } from "react";
+import { TaskContext } from "./TaskContext";
 import { initialTaskState } from "./initialTaskState";
 import { taskReducer } from "./taskReducer";
 import { TimerWorkerSingleton } from "../../workers/timeWorkerSingleton";
